@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Add Collection - Iron Sight Codex</title>
+    </head>
+
+    <header>
+        <h1>Iron Sight Codex</h1>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../pages/detail.html">Archive</a>
+            <a href="form.html">Add Collection</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Add New Collection</h2>
+
+            <form>
+
+                <label for="name">Name</label>
+                <br>
+                <input type="text" id="name" name="name">
+                <br><br>
+
+                <label for="origin">Origin</label>
+                <br>
+                <input type="text" id="origin" name="origin">
+                <br><br>
+
+                <label for="category">Category</label>
+                <br>
+                <select id="category" name="category">
+                    <option value="">Select Category</option>
+                    <option value="rifle">Rifle</option>
+                    <option value="handgun">Handgun</option>
+                    <option value="shotgun">Shotgun</option>
+                    <option value="other">Other</option>
+                </select>
+                <br><br>
+
+                <label for="image">Image</label>
+                <br>
+                <input type="file" id="image" name="image" accept="image/*">
+                <br><br>
+
+                <label for="description">Description</label>
+                <br>
+                <textarea id="description" name="description" rows="6" cols="50"></textarea>
+                <br><br>
+                
+                <button type="button">Cancel</button>
+                <button type="submit">Add Collection</button>               
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Iron Sight Codex</p>
+    </footer>
+
+</html>
