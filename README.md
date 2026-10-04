@@ -35,14 +35,17 @@ A form for adding a new firearm collection.
 ### Home
 
 ![Home Page](docs/screenshots/week%203/home_w3.png)
+![Home Page](docs/screenshots/week%203/home_w3_m.png)
 
 ### Firearm Detail
 
 ![Detail Page](docs/screenshots/week%203/detail_w3.png)
+![Detail Page](docs/screenshots/week%203/detail_w3_m.png)
 
 ### Add Collection
 
 ![Add Collection](docs/screenshots/week%203/add_collection_w3.png)
+![Add Collection](docs/screenshots/week%203/add_collection_w3_m.png)
 
 ## Technologies
 
