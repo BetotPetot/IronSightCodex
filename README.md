@@ -34,19 +34,20 @@ A form for adding a new firearm collection.
 
 ### Home
 
-![Home Page](docs/screenshots/home.png)
+![Home Page](docs/screenshots/week%203/home_w3.png)
 
 ### Firearm Detail
 
-![Detail Page](docs/screenshots/detail.png)
+![Detail Page](docs/screenshots/week%203/detail_w3.png)
 
 ### Add Collection
 
-![Add Collection](docs/screenshots/add_collection.png)
+![Add Collection](docs/screenshots/week%203/add_collection_w3.png)
 
 ## Technologies
 
 - HTML5
+- CSS
 
 ## Project Status
 
