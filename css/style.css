@@ -50,7 +50,7 @@ h1, h2, h3, .font-chakra {
 .header-inner,
 main,
 .footer-inner {
-    width: calc(100% - 80px);
+    width: 100%;
     max-width: none;
     margin: 0 auto;
     padding-left: 80px;
@@ -627,3 +627,120 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: #3A4A5F;
 }
+
+@media (max-width: 500px) {
+    .site-header {
+        padding: 16px 20px;
+    }
+
+    .header-inner {
+        align-items: center;
+    }
+
+    /* LOGO */
+    .logo {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .logo h1 {
+        white-space: nowrap;
+        font-size: 20px;
+    }
+
+    /* NAVIGATION */
+    .nav {
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+
+    .nav a {
+        width: auto;
+        text-align: center;
+        padding: 14px 18px;
+        font-size: 16px;
+    }
+
+    /* HERO */
+    .hero {
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .hero p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* COLLECTION */
+    main {
+        width: 100%;
+        max-width: none;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .collection-grid {
+        width: 100%;
+        max-width: none;
+        grid-template-columns: 1fr;
+    }
+
+    .codex-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* FORM */
+    .form-card {
+        width: calc(100% - 40px);
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .form-actions button {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+}
+
+
+
+
