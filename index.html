@@ -1,53 +1,128 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Sight Codex</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-<html>
+<body>
 
-    <head> 
-        <title>Iron Sight Codex</title> 
-    </head>
+    <header class="site-header">
+        <div class="header-inner">
 
-    <header>
-        <h1>Iron Sight Codex</h1>
+            <div class="brand">
+                <span class="brand-dot"></span>
+                <div>
+                    <h1>Iron Sight Codex</h1>
+                    <p>// DIGITAL FIREARMS ARCHIVE</p>
+                </div>
+            </div>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="pages/detail.html">Archive</a>
-            <a href="pages/form.html">Add Collection</a>
-        </nav>
+            <nav class="nav">
+                <a href="index.html" class="active">HOME</a>
+                <a href="pages/detail.html">ARCHIVE</a>
+                <a href="pages/form.html">ADD COLLECTION</a>
+            </nav>
 
+        </div>
     </header>
 
     <main>
 
-        <section>
+        <section class="codex-card hero">
+            <span class="tag">// CLASSIFIED ARCHIVES ACCESS</span>
+
             <h2>Explore Firearms History</h2>
+
             <p>
-                Explore historical information about firearms
-                from different periods and regions.
+                Explore historical information about firearms from different
+                periods and regions.
             </p>
         </section>
 
         <section>
-            <h2>Featured Collection</h2>
 
-            <article>
-                <img src="assets/cmp_buynow-1.jpg" 
-                    alt="Example Firearm Image" width="300" height="200">
+            <div class="section-heading">
+                <h2>Featured Collection</h2>
+                <span class="font-mono-tactical">// HISTORICAL RIFLES</span>
+            </div>
 
-                <br>
-                <a href="pages/detail.html"> M1 Garand</a>
+            <div class="collection-grid">
 
-                <h3>Latest Addition</h3>
-                <p>Discover the latest addition to our collection.</p>
-                <a href="pages/detail.html">View Details</a>
-            </article>
+                <article class="codex-card collection-card">
+                    <div>
+                        <img class="card-image" src="assets/images/m1garand.jpg" alt="M1 Garand">
+
+                        <h3>M1 Garand</h3>
+
+                        <p>
+                            A historical semi-automatic rifle widely used
+                            during World War II and the Korean War.
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="font-mono-tactical">ORIGIN: USA</span>
+                        <a href="pages/detail.html" class="button button-primary">
+                            VIEW DETAILS &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <article class="codex-card collection-card">
+                    <div>
+                        <img class="card-image" src="assets/images/kar98k.jpg" alt="Kar 98k">
+
+                        <h3>Kar 98k</h3>
+
+                        <p>
+                            A historical bolt-action rifle adopted by the
+                            German Wehrmacht in 1935.
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="font-mono-tactical">ORIGIN: GERMANY</span>
+                        <a href="pages/detail.html" class="button button-primary">
+                            VIEW DETAILS &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <article class="codex-card collection-card">
+                    <div>
+                        <img class="card-image" src="assets/images/stg44.jpg" alt="StG 44">
+
+                        <h3>stg 44</h3>
+
+                        <p>
+                            A historically significant German firearm from
+                            the later period of World War II.
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="font-mono-tactical">ORIGIN: GERMANY</span>
+                        <a href="pages/detail.html" class="button button-primary">
+                            VIEW DETAILS &rarr;
+                        </a>
+                    </div>
+                </article>
+
+            </div>
 
         </section>
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 Iron Sight Codex</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Iron Sight Codex</p>
+            <p>WEB PROGRAMMING PROJECT</p>
+        </div>
     </footer>
 
+</body>
 </html>

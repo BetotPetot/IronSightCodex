@@ -1,54 +1,116 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M1 Garand - Iron Sight Codex</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
 
-<html>
+<body>
 
-    <head> 
-        <title>Iron Sight Codex</title> 
-    </head>
+    <header class="site-header">
+        <div class="header-inner">
 
-    <body>
+            <div class="brand">
+                <span class="brand-dot"></span>
+                <div>
+                    <h1>Iron Sight Codex</h1>
+                    <p>// DIGITAL FIREARMS ARCHIVE</p>
+                </div>
+            </div>
 
-        <header>
-            <h1>Iron Sight Codex</h1>
-
-            <nav>
-                <a href="../index.html">Home</a>
-                <a href="detail.html">Archive</a>
-                <a href="../pages/form.html">Add Collection</a>
+            <nav class="nav">
+                <a href="../index.html">HOME</a>
+                <a href="detail.html" class="active">ARCHIVE</a>
+                <a href="form.html">ADD COLLECTION</a>
             </nav>
 
-        </header>
+        </div>
+    </header>
 
-        <main>
+    <main>
 
-            <section>
+        <div class="section-heading">
+            <h2>Archive Detail</h2>
+            <a href="../index.html" class="button button-secondary">BACK TO HOME</a>
+        </div>
+
+        <section class="detail-layout">
+
+            <div>
+                <div class="codex-card detail-image image-placeholder">
+                    <img class="card-image" src="../assets/images/m1garand.jpg" alt="M1 Garand">
+                </div>
+
+                <div class="detail-specs">
+
+                    <article class="spec-card">
+                        <span>FEED SYSTEM</span>
+                        <strong>8-ROUND CLIP</strong>
+                    </article>
+
+                    <article class="spec-card">
+                        <span>EFFECTIVE RANGE</span>
+                        <strong>457 METERS</strong>
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="detail-info">
+
+                <span class="tag">SEMI-AUTOMATIC RIFLE</span>
 
                 <h2>M1 Garand</h2>
-                <img src="../assets/cmp_buynow-1.jpg" 
-                    alt="M1 Garand Image" width="300" height="200">
-                
-                <article>
-                    <h3>Origin</h3>
-                    <p>United States</p>
 
-                    <h3>Category</h3>
-                    <p>Rifle</p>
+                <article class="attribute-grid">
 
+                    <div class="attribute-card">
+                        <h3>Origin</h3>
+                        <p>United States</p>
+                    </div>
+
+                    <div class="attribute-card">
+                        <h3>Category</h3>
+                        <p>Rifle</p>
+                    </div>
+
+                </article>
+
+                <article class="overview">
                     <h3>Historical Overview</h3>
-                    <p>The M1 Garand was the first successful 
-                        semi-automatic rifle adopted by the U.S. military. 
-                        It was widely used during World War II and the Korean War.
+
+                    <p class="detail-description">
+                        The M1 Garand was the first successful semi-automatic
+                        rifle adopted by the U.S. military. It was widely used
+                        during World War II and the Korean War.
+                        <br>
+                        <br>
+                        The rifle is chambered for the .30-06 Springfield cartridge 
+                        and is named after its Canadian-American designer, John Garand. 
+                        It was the first standard-issue autoloading rifle for the United 
+                        . By most accounts, the M1 rifle performed well. 
+                        General George S. Patton called it "the greatest battle 
+                        implement ever devised". The M1 replaced the (bolt-action) 
+                        M1903 Springfield as the U.S. service rifle in 1936, and was 
+                        itself replaced by the (selective-fire) M14 rifle on 26 March 1958.
                     </p>
                 </article>
 
-            </section>
+            </div>
 
-        </main>
-    
-        <footer>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
             <p>&copy; 2026 Iron Sight Codex</p>
-        </footer>
+            <p>WEB PROGRAMMING PROJECT</p>
+        </div>
+    </footer>
 
-    </body>
-
+</body>
 </html>
