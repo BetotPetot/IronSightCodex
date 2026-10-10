@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M1 Garand - Iron Sight Codex</title>
+
     <link rel="stylesheet" href="../css/style.css">
+
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -20,7 +30,7 @@
                 </div>
             </div>
 
-            <nav class="nav">
+            <nav class="nav flex flex-row flex-nowrap items-center justify-center gap-1 md:gap-2">
                 <a href="../index.html">HOME</a>
                 <a href="detail.html" class="active">ARCHIVE</a>
                 <a href="form.html">ADD COLLECTION</a>
@@ -36,14 +46,14 @@
             <a href="../index.html" class="button button-secondary">BACK TO HOME</a>
         </div>
 
-        <section class="detail-layout">
+        <section class="detail-layout grid grid-cols-1 gap-6 lg:grid-cols-2">
 
             <div>
                 <div class="codex-card detail-image image-placeholder">
                     <img class="card-image" src="../assets/images/m1garand.jpg" alt="M1 Garand">
                 </div>
 
-                <div class="detail-specs">
+                <div class="detail-specs grid grid-cols-2 gap-4">
 
                     <article class="spec-card">
                         <span>FEED SYSTEM</span>
@@ -65,7 +75,7 @@
 
                 <h2>M1 Garand</h2>
 
-                <article class="attribute-grid">
+                <article class="attribute-grid grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                     <div class="attribute-card">
                         <h3>Origin</h3>
@@ -91,7 +101,7 @@
                         The rifle is chambered for the .30-06 Springfield cartridge 
                         and is named after its Canadian-American designer, John Garand. 
                         It was the first standard-issue autoloading rifle for the United 
-                        . By most accounts, the M1 rifle performed well. 
+                        States. By most accounts, the M1 rifle performed well. 
                         General George S. Patton called it "the greatest battle 
                         implement ever devised". The M1 replaced the (bolt-action) 
                         M1903 Springfield as the U.S. service rifle in 1936, and was 
