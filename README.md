@@ -34,23 +34,28 @@ A form for adding a new firearm collection.
 
 ### Home
 
-![Home Page](docs/screenshots/week%203/home_w3.png)
-![Home Page](docs/screenshots/week%203/home_w3_m.png)
+![Home Page](docs/screenshots/week%204/home_w4.png)
+![Home Page](docs/screenshots/week%204/home_w4_m.png)
 
 ### Firearm Detail
 
-![Detail Page](docs/screenshots/week%203/detail_w3.png)
-![Detail Page](docs/screenshots/week%203/detail_w3_m.png)
+![Detail Page](docs/screenshots/week%204/detail_w4.png)
+![Detail Page](docs/screenshots/week%204/detail_w4_m.png)
 
 ### Add Collection
 
-![Add Collection](docs/screenshots/week%203/add_collection_w3.png)
-![Add Collection](docs/screenshots/week%203/add_collection_w3_m.png)
+![Add Collection](docs/screenshots/week%204/add_collection_w4.png)
+![Add Collection](docs/screenshots/week%204/add_collection_w4_m.png)
 
 ## Technologies
 
 - HTML5
 - CSS
+- Talwind
+
+## Why Tailwind?
+
+Tailwind CSS was selected because the Iron Sight Codex project features a specific interface design based on a tactical archive theme, requiring precise control over layout, spacing, colors, and responsiveness. With its utility-first approach, Tailwind can be implemented incrementally across components such as the navbar, hero section, collection grid, forms, and detail pages—without necessitating a complete overhaul of existing native CSS. This approach enables the development of a more flexible, consistent, and responsive interface across both desktop and mobile devices.
 
 ## Project Status
 

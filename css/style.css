@@ -317,6 +317,24 @@ main {
     color: #CBD5E1;
 }
 
+/* Keep collection buttons in a single horizontal row */
+.collection-card .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.collection-card .card-footer .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    width: auto;
+    min-width: max-content;
+}
+
 .button {
     display: inline-block;
     border: 0;
@@ -738,6 +756,41 @@ html {
         width: 100%;
         min-width: 0;
         box-sizing: border-box;
+    }
+
+    .collection-card .card-footer {
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .collection-card .card-footer .font-mono-tactical {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .collection-card .card-footer .button {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .detail-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .detail-specs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .detail-info {
+        min-width: 0;
+    }
+
+    .detail-info h2 {
+        font-size: 30px;
+        margin: 12px 0 20px;
     }
 }
 

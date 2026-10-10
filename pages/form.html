@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Collection - Iron Sight Codex</title>
+
     <link rel="stylesheet" href="../css/style.css">
+
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -20,7 +30,7 @@
                 </div>
             </div>
 
-            <nav class="nav">
+            <nav class="nav flex flex-row flex-nowrap items-center justify-center gap-1 md:gap-2">
                 <a href="../index.html">HOME</a>
                 <a href="detail.html">ARCHIVE</a>
                 <a href="form.html" class="active">ADD COLLECTION</a>
@@ -31,7 +41,7 @@
 
     <main>
 
-        <section class="form-card codex-card">
+        <section class="form-card codex-card p-5 md:p-8">
 
             <div class="section-heading form-heading">
                 <div>
@@ -40,25 +50,28 @@
                 </div>
             </div>
 
-            <form>
+            <form class="space-y-5">
 
-                <div class="form-group">
+                <div class="form-group flex flex-col gap-2">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name"
+                    <input class="w-full box-border px-3 py-3" 
+                        type="text" id="name" name="name"
                         placeholder="e.g. M1 Garand, Thompson SMG">
                 </div>
 
-                <div class="form-row">
+                <div class="form-row grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                    <div class="form-group">
+                    <div class="form-group flex flex-col gap-2">
                         <label for="origin">Origin</label>
-                        <input type="text" id="origin" name="origin"
+                        <input class="w-full box-border px-3 py-3"
+                            type="text" id="origin" name="origin"
                             placeholder="e.g. United States, Germany">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group flex flex-col gap-2">
                         <label for="category">Category</label>
-                        <select id="category" name="category">
+                        <select class="w-full box-border px-3 py-3"
+                         id="category" name="category">
                             <option value="">Select Category</option>
                             <option value="rifle">Rifle</option>
                             <option value="handgun">Handgun</option>
@@ -69,18 +82,20 @@
 
                 </div>
 
-                <div class="form-group">
+                <div class="form-group flex flex-col gap-2">
                     <label for="image">Image File</label>
-                    <input type="file" id="image" name="image" accept="image/*">
+                    <input class="w-full box-border px-3 py-3" 
+                    type="file" id="image" name="image" accept="image/*">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group flex flex-col gap-2">
                     <label for="description">Historical Briefing / Description</label>
-                    <textarea id="description" name="description"
+                    <textarea class="w-full box-border px-3 py-3" 
+                        id="description" name="description"
                         placeholder="Enter detailed historical background, operational records, and tactical usage..."></textarea>
                 </div>
 
-                <div class="form-actions">
+                <div class="form-actions flex flex-wrap items-center justify-end gap-4">
                     <button type="button" class="button button-secondary">
                         CANCEL
                     </button>
