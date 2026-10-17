@@ -34,24 +34,36 @@ A form for adding a new firearm collection.
 
 ### Home
 
-![Home Page](docs/screenshots/week%204/home_w4.png)
-![Home Page](docs/screenshots/week%204/home_w4_m.png)
+![Home Page](docs/screenshots/week%205/Desktop/Screenshot%20(358).png)
+![Home Page](docs/screenshots/week%205/Desktop/Screenshot%20(359).png)
+![Home Page](docs/screenshots/week%205/Mobile/Screenshot%20(364).png)
+![Home Page](docs/screenshots/week%205/Mobile/Screenshot%20(365).png)
 
 ### Firearm Detail
 
-![Detail Page](docs/screenshots/week%204/detail_w4.png)
-![Detail Page](docs/screenshots/week%204/detail_w4_m.png)
+![Detail Page](docs/screenshots/week%205/Desktop/Screenshot%20(360).png)
+![Detail Page](docs/screenshots/week%205/Mobile/Screenshot%20(366).png)
 
 ### Add Collection
 
-![Add Collection](docs/screenshots/week%204/add_collection_w4.png)
-![Add Collection](docs/screenshots/week%204/add_collection_w4_m.png)
+![Add Collection](docs/screenshots/week%205/Desktop/Screenshot%20(361).png)
+![Add Collection](docs/screenshots/week%205/Desktop/Screenshot%20(362).png)
+![Add Collection](docs/screenshots/week%205/Desktop/Screenshot%20(363).png)
+![Add Collection](docs/screenshots/week%205/Mobile/Screenshot%20(367).png)
+![Add Collection](docs/screenshots/week%205/Mobile/Screenshot%20(368).png)
+![Add Collection](docs/screenshots/week%205/Mobile/Screenshot%20(369).png)
+
+### Demo Videos
+
+- [Desktop Demo](docs/screenshots/week%205/Demo%20Video/Desktop_Demo.mp4)
+- [Mobile Demo](docs/screenshots/week%205/Demo%20Video/Mobile_Demo.mp4)
 
 ## Technologies
 
 - HTML5
 - CSS
 - Talwind
+- JavaScript
 
 ## Why Tailwind?
 
