@@ -33,6 +33,12 @@ function renderCollections() {
 
     collectionGrid.innerHTML = "";
 
+    const collectionCount = document.getElementById("collection-count");
+
+    if (collectionCount) {
+        collectionCount.textContent = `${collections.length} COLLECTIONS`;
+    }
+
     for (const item of collections) {
         const card = document.createElement("article");
         card.className = "codex-card collection-card flex flex-col";
