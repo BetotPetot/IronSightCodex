@@ -50,49 +50,76 @@
                 </div>
             </div>
 
-            <form class="space-y-5">
+            <form id="collection-form" class="space-y-5" novalidate>
+
+                <div id="form-message" class="form-message" style="display: none;"></div>
 
                 <div class="form-group flex flex-col gap-2">
                     <label for="name">Name</label>
+
                     <input class="w-full box-border px-3 py-3" 
                         type="text" id="name" name="name"
-                        placeholder="e.g. M1 Garand, Thompson SMG">
+                        placeholder="e.g. M1 Garand, Thompson SMG"
+                        required>
+
+                    <span class="field-error" id="name-error">
+                        Name is required.
+                    </span>
                 </div>
 
                 <div class="form-row grid grid-cols-1 md:grid-cols-2 gap-5">
 
                     <div class="form-group flex flex-col gap-2">
                         <label for="origin">Origin</label>
+
                         <input class="w-full box-border px-3 py-3"
                             type="text" id="origin" name="origin"
-                            placeholder="e.g. United States, Germany">
+                            placeholder="e.g. United States, Germany"
+                            required>
+
+                        <span class="field-error" id="origin-error">
+                            Origin is required.
+                        </span>
                     </div>
 
                     <div class="form-group flex flex-col gap-2">
                         <label for="category">Category</label>
+
                         <select class="w-full box-border px-3 py-3"
-                         id="category" name="category">
+                         id="category" name="category" required>
                             <option value="">Select Category</option>
                             <option value="rifle">Rifle</option>
                             <option value="handgun">Handgun</option>
                             <option value="shotgun">Shotgun</option>
                             <option value="other">Other</option>
                         </select>
+
+                        <span class="field-error" id="category-error">
+                            Please select a category.
+                        </span>
                     </div>
 
                 </div>
 
                 <div class="form-group flex flex-col gap-2">
                     <label for="image">Image File</label>
+
                     <input class="w-full box-border px-3 py-3" 
                     type="file" id="image" name="image" accept="image/*">
                 </div>
 
                 <div class="form-group flex flex-col gap-2">
                     <label for="description">Historical Briefing / Description</label>
-                    <textarea class="w-full box-border px-3 py-3" 
-                        id="description" name="description"
-                        placeholder="Enter detailed historical background, operational records, and tactical usage..."></textarea>
+
+                    <textarea class="w-full box-border px-3 py-3"
+                        id="description"
+                        name="description"
+                        placeholder="Enter detailed historical background, operational records, and tactical usage..."
+                        required></textarea>
+
+                    <span class="field-error" id="description-error">
+                        Description is required.
+                    </span>
                 </div>
 
                 <div class="form-actions flex flex-wrap items-center justify-end gap-4">
@@ -118,5 +145,23 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../jquery.js"></script>
 </body>
+
+    <div id="form-toast" class="form-toast" role="status" aria-live="polite">
+        <span class="toast-icon">✓</span>
+        
+        <div class="toast-content">
+            <strong>COLLECTION ADDED SUCCESSFULLY</strong>
+            <p>Form validation completed.</p>
+        </div>
+
+        <button type="button" id="close-toast" aria-label="Close notification">
+            &times;
+        </button>
+
+        <div class="toast-progress"></div>
+    </div>
+
 </html>
