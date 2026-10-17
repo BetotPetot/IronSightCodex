@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script>
-        tailwind.config = {
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
             corePlugins: {
                 preflight: false
             }
         };
     </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -58,72 +60,27 @@
 
             <div class="section-heading">
                 <h2>Featured Collection</h2>
-                <span class="font-mono-tactical">// HISTORICAL RIFLES</span>
+
+                <div class="collection-meta">
+                    <span id="collection-count" class="font-mono-tactical"></span>
+
+                    <span class="font-mono-tactical">
+                        // HISTORICAL RIFLES
+                    </span>
+
+                    <button
+                        type="button"
+                        id="toggle-collections"
+                        class="button button-secondary">
+                        HIDE COLLECTIONS
+                    </button>
+                </div>
             </div>
-
-            <div class="collection-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-                <article class="codex-card collection-card flex flex-col">
-                    <div class="flex flex-col gap-4">
-                        <img class="card-image" src="assets/images/m1garand.jpg" alt="M1 Garand">
-
-                        <h3>M1 Garand</h3>
-
-                        <p>
-                            A historical semi-automatic rifle widely used
-                            during World War II and the Korean War.
-                        </p>
-                    </div>
-
-                    <div class="card-footer">
-                        <span class="font-mono-tactical">ORIGIN: USA</span>
-                        <a href="pages/detail.html" class="button button-primary">
-                            VIEW DETAILS &rarr;
-                        </a>
-                    </div>
-                </article>
-
-                <article class="codex-card collection-card flex flex-col">
-                    <div class="flex flex-col gap-4">
-                        <img class="card-image" src="assets/images/kar98k.jpg" alt="Kar 98k">
-
-                        <h3>Kar 98k</h3>
-
-                        <p>
-                            A historical bolt-action rifle adopted by the
-                            German Wehrmacht in 1935.
-                        </p>
-                    </div>
-
-                    <div class="card-footer">
-                        <span class="font-mono-tactical">ORIGIN: GERMANY</span>
-                        <a href="pages/detail.html" class="button button-primary">
-                            VIEW DETAILS &rarr;
-                        </a>
-                    </div>
-                </article>
-
-                <article class="codex-card collection-card flex flex-col">
-                    <div class="flex flex-col gap-4">
-                        <img class="card-image" src="assets/images/stg44.jpg" alt="StG 44">
-
-                        <h3>stg 44</h3>
-
-                        <p>
-                            A historically significant German firearm from
-                            the later period of World War II.
-                        </p>
-                    </div>
-
-                    <div class="card-footer">
-                        <span class="font-mono-tactical">ORIGIN: GERMANY</span>
-                        <a href="pages/detail.html" class="button button-primary">
-                            VIEW DETAILS &rarr;
-                        </a>
-                    </div>
-                </article>
-
-            </div>
+            
+                <div
+                    id="collection-list"
+                    class="collection-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                </div>
 
         </section>
 
@@ -136,5 +93,8 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+    <script src="jquery.js"></script>
 </body>
 </html>
