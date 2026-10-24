@@ -1,6 +1,5 @@
 
-import CollectionDetail from './pages/CollectionDetail'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Routes,
   Route,
@@ -11,7 +10,9 @@ import {
 
 import Header from './components/Header'
 import CollectionStats from './components/CollectionStats'
+import CollectionDetail from './pages/CollectionDetail'
 import Footer from './components/Footer'
+import Toast from './components/Toast'
 
 import Home from './pages/Home'
 import Archive from './pages/Archive'
@@ -66,6 +67,12 @@ function App() {
 
   const navigate = useNavigate()
 
+  const [toastVisible, setToastVisible] = useState(false)
+
+  const closeToast = useCallback(() => {
+    setToastVisible(false)
+  }, [])
+
   function handleAddCollection(newCollection) {
     const collection = {
       ...newCollection,
@@ -77,12 +84,18 @@ function App() {
       collection,
     ])
 
+    setToastVisible(true)
     navigate('/archive')
   }
 
   return (
     <>
       <Header />
+
+      <Toast
+        visible={toastVisible}
+        onClose={closeToast}
+      />
 
       <main id="home">
         <Routes>

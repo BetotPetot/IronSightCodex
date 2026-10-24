@@ -2,15 +2,32 @@
 import { useState } from 'react'
 
 function AddCollection({ onAddCollection }) {
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         name: '',
         origin: '',
         category: '',
         description: '',
-    })
+    }
 
+    const [formData, setFormData] = useState(initialFormData)
     const [imageFile, setImageFile] = useState(null)
     const [imagePreview, setImagePreview] = useState('')
+    const [errors, setErrors] = useState({})
+
+    function validateField(name, value) {
+        if (typeof value === 'string' && !value.trim()) {
+            const messages = {
+                name: 'Name is required.',
+                origin: 'Origin is required.',
+                category: 'Please select a category.',
+                description: 'Description is required.',
+            }
+
+            return messages[name]
+        }
+
+        return ''
+    }
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -19,18 +36,18 @@ function AddCollection({ onAddCollection }) {
             ...previousData,
             [name]: value,
         }))
+
+        setErrors((previousErrors) => ({
+            ...previousErrors,
+            [name]: validateField(name, value),
+        }))
     }
 
     function handleCancel() {
-        setFormData({
-            name: '',
-            origin: '',
-            category: '',
-            description: '',
-        })
-
+        setFormData(initialFormData)
         setImageFile(null)
         setImagePreview('')
+        setErrors({})
 
         const imageInput = document.getElementById('image')
         if (imageInput) imageInput.value = ''
@@ -39,13 +56,19 @@ function AddCollection({ onAddCollection }) {
     function handleSubmit(event) {
         event.preventDefault()
 
-        if (
-            !formData.name.trim() ||
-            !formData.origin.trim() ||
-            !formData.category ||
-            !formData.description.trim()
-        ) {
-            alert('Please fill in all required fields.')
+        const newErrors = {}
+
+        Object.entries(formData).forEach(([name, value]) => {
+            const error = validateField(name, value)
+
+            if (error) {
+                newErrors[name] = error
+            }
+        })
+
+        setErrors(newErrors)
+
+        if (Object.keys(newErrors).length > 0) {
             return
         }
 
@@ -58,15 +81,10 @@ function AddCollection({ onAddCollection }) {
             image: imageUrl,
         })
 
-        setFormData({
-            name: '',
-            origin: '',
-            category: '',
-            description: '',
-        })
-
+        setFormData(initialFormData)
         setImageFile(null)
         setImagePreview('')
+        setErrors({})
 
         const imageInput = document.getElementById('image')
         if (imageInput) imageInput.value = ''
@@ -81,7 +99,11 @@ function AddCollection({ onAddCollection }) {
                 </div>
             </div>
 
-            <form className="collection-form" onSubmit={handleSubmit}>
+            <form
+                className="collection-form"
+                onSubmit={handleSubmit}
+                noValidate
+            >
                 <div className="form-group">
                     <label htmlFor="name">NAME</label>
                     <input
@@ -91,8 +113,15 @@ function AddCollection({ onAddCollection }) {
                         placeholder="e.g. M1 Garand, Thompson SMG"
                         value={formData.name}
                         onChange={handleChange}
-                        required
+                        className={errors.name ? 'field-invalid' : ''}
+                        aria-invalid={Boolean(errors.name)}
+                        aria-describedby={errors.name ? 'name-error' : undefined}
                     />
+                    {errors.name && (
+                        <small id="name-error" className="field-error">
+                            {errors.name}
+                        </small>
+                    )}
                 </div>
 
                 <div className="form-row">
@@ -105,8 +134,15 @@ function AddCollection({ onAddCollection }) {
                             placeholder="e.g. United States, Germany"
                             value={formData.origin}
                             onChange={handleChange}
-                            required
+                            className={errors.origin ? 'field-invalid' : ''}
+                            aria-invalid={Boolean(errors.origin)}
+                            aria-describedby={errors.origin ? 'origin-error' : undefined}
                         />
+                        {errors.origin && (
+                            <small id="origin-error" className="field-error">
+                                {errors.origin}
+                            </small>
+                        )}
                     </div>
 
                     <div className="form-group">
@@ -116,7 +152,9 @@ function AddCollection({ onAddCollection }) {
                             name="category"
                             value={formData.category}
                             onChange={handleChange}
-                            required
+                            className={errors.category ? 'field-invalid' : ''}
+                            aria-invalid={Boolean(errors.category)}
+                            aria-describedby={errors.category ? 'category-error' : undefined}
                         >
                             <option value="">Select Category</option>
                             <option value="Rifle">Rifle</option>
@@ -124,12 +162,16 @@ function AddCollection({ onAddCollection }) {
                             <option value="Shotgun">Shotgun</option>
                             <option value="Other">Other</option>
                         </select>
+                        {errors.category && (
+                            <small id="category-error" className="field-error">
+                                {errors.category}
+                            </small>
+                        )}
                     </div>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="image">IMAGE FILE</label>
-
                     <input
                         id="image"
                         name="image"
@@ -141,9 +183,7 @@ function AddCollection({ onAddCollection }) {
                             if (!file) return
 
                             setImageFile(file)
-
-                            const previewUrl = URL.createObjectURL(file)
-                            setImagePreview(previewUrl)
+                            setImagePreview(URL.createObjectURL(file))
                         }}
                     />
 
@@ -165,8 +205,17 @@ function AddCollection({ onAddCollection }) {
                         placeholder="Enter historical background and description..."
                         value={formData.description}
                         onChange={handleChange}
-                        required
+                        className={errors.description ? 'field-invalid' : ''}
+                        aria-invalid={Boolean(errors.description)}
+                        aria-describedby={
+                            errors.description ? 'description-error' : undefined
+                        }
                     />
+                    {errors.description && (
+                        <small id="description-error" className="field-error">
+                            {errors.description}
+                        </small>
+                    )}
                 </div>
 
                 <div className="form-actions">

@@ -13,9 +13,11 @@ function CollectionDetail({ collection }) {
     return (
         <section className="collection-section">
 
-            <Link to="/archive" className="button button-primary">
-                &larr; BACK TO ARCHIVE
-            </Link>
+            <div className="detail-actions">
+                <Link to="/archive" className="button button-primary">
+                    &larr; BACK TO ARCHIVE
+                </Link>
+            </div>
 
             <div className="section-heading">
                 <h2>{collection.name}</h2>
