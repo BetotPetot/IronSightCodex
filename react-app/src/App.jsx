@@ -1,120 +1,148 @@
+
+import CollectionDetail from './pages/CollectionDetail'
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useParams,
+} from 'react-router-dom'
+
+import Header from './components/Header'
+import CollectionStats from './components/CollectionStats'
+import Footer from './components/Footer'
+
+import Home from './pages/Home'
+import Archive from './pages/Archive'
+import AddCollectionPage from './pages/AddCollectionPage'
+
 import './App.css'
 
+const initialCollections = [
+  {
+    id: 1,
+    name: 'M1 Garand',
+    origin: 'USA',
+    category: 'Rifle',
+    image: '/images/m1garand.jpg',
+    description:
+      'A historical semi-automatic rifle widely used during World War II and the Korean War.',
+  },
+  {
+    id: 2,
+    name: 'Kar 98k',
+    origin: 'GERMANY',
+    category: 'Rifle',
+    image: '/images/kar98k.jpg',
+    description:
+      'A historical bolt-action rifle adopted by the German Wehrmacht in 1935.',
+  },
+  {
+    id: 3,
+    name: 'StG 44',
+    origin: 'GERMANY',
+    category: 'Rifle',
+    image: '/images/stg44.jpg',
+    description:
+      'A historically significant German firearm from the later period of World War II.',
+  },
+]
+
+function CollectionDetailRoute({ collections }) {
+  const { id } = useParams()
+
+  const collection = collections.find(
+    (item) => item.id === Number(id)
+  )
+
+  return <CollectionDetail collection={collection} />
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [collections, setCollections] = useState(initialCollections)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+
+  const navigate = useNavigate()
+
+  function handleAddCollection(newCollection) {
+    const collection = {
+      ...newCollection,
+      id: Date.now(),
+    }
+
+    setCollections((previousCollections) => [
+      ...previousCollections,
+      collection,
+    ])
+
+    navigate('/archive')
+  }
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <Header />
 
-      <div className="ticks"></div>
+      <main id="home">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Home />
+                <CollectionStats
+                  collections={collections}
+                />
+              </>
+            }
+          />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <Route
+            path="/archive"
+            element={
+              <>
+                <Home />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+                <CollectionStats
+                  collections={collections}
+                />
+
+                <Archive
+                  collections={collections}
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                />
+              </>
+            }
+          />
+
+          <Route
+            path="/add-collection"
+            element={
+              <AddCollectionPage
+                onAddCollection={handleAddCollection}
+              />
+            }
+          />
+
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
+
+          <Route
+            path="/archive/:id"
+            element={
+              <CollectionDetailRoute collections={collections} />
+            }
+          />
+        </Routes>
+      </main>
+
+      <Footer />
     </>
   )
 }
