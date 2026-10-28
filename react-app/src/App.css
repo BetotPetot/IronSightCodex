@@ -700,7 +700,122 @@ input[type="file"]::file-selector-button:hover {
   }
 }
 
+/* Historical Research Feed */
+.historical-research {
+    margin: 40px 0;
+}
 
+.historical-research .section-heading {
+    margin-bottom: 24px;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.research-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--card-bg, #161f2d);
+    border: 1px solid var(--border-color, #293648);
+    border-left: 3px solid #00e887;
+    min-width: 0;
+}
+
+.research-card h3 {
+    margin: 0 0 14px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.research-card p {
+    margin: 0 0 20px;
+    color: var(--text-secondary, #b8c5d6);
+    line-height: 1.7;
+}
+
+.research-link {
+    margin-top: auto;
+    color: #00e887;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.research-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.research-status {
+    padding: 24px;
+    background: var(--card-bg, #161f2d);
+    border: 1px solid var(--border-color, #293648);
+    border-left: 3px solid #00e887;
+}
+
+.research-status p {
+    margin: 0 0 16px;
+    line-height: 1.7;
+}
+
+.research-error {
+    border-left-color: #ff565f;
+}
+
+.research-error .button {
+    margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+    .research-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.research-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.research-card-meta {
+    color: #7899bd;
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.research-card h3 {
+    margin: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.research-card p {
+    margin: 0;
+    line-height: 1.7;
+    color: #c6d5e6;
+}
+
+.research-card a {
+    align-self: flex-start;
+    margin-top: auto;
+    color: #00f58a;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.research-card a:hover {
+    color: #ff8a24;
+    text-decoration: underline;
+}
 
 
 

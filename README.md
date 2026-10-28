@@ -34,7 +34,7 @@ A form for adding a new firearm collection.
 
 ### Home
 
-![Home Page](docs/screenshots/week%206/Screenshot%20(370).png)
+![Home Page](docs/screenshots/week%207/Screenshot%20(378).png)
 
 ### Firearm Detail
 
