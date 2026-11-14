@@ -21,15 +21,25 @@ import AddCollectionPage from './pages/AddCollectionPage'
 import './App.css'
 
 
-function CollectionDetailRoute({ collections }) {
+
+function CollectionDetailRoute({
+  collections,
+  onUpdateCollection,
+}) {
   const { id } = useParams()
 
   const collection = collections.find(
     (item) => item.id === Number(id)
   )
 
-  return <CollectionDetail collection={collection} />
+  return (
+    <CollectionDetail
+      collection={collection}
+      onUpdateCollection={onUpdateCollection}
+    />
+  )
 }
+
 
 function App() {
   const [collections, setCollections] = useState([])
@@ -67,6 +77,8 @@ function App() {
   const navigate = useNavigate()
 
   const [toastVisible, setToastVisible] = useState(false)
+  const [toastTitle, setToastTitle] = useState('')
+  const [toastMessage, setToastMessage] = useState('')
 
   const closeToast = useCallback(() => {
     setToastVisible(false)
@@ -105,12 +117,64 @@ function App() {
         createdCollection,
       ])
 
+      setToastTitle('COLLECTION ADDED SUCCESSFULLY')
+      setToastMessage('New collection has been saved to the archive.')
       setToastVisible(true)
+
       navigate('/archive')
 
       return true
     } catch (error) {
       console.error('Error adding collection:', error)
+      alert(error.message)
+
+      return false
+    }
+  }
+
+
+  async function handleUpdateCollection(id, updatedCollection) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/collections/${id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...updatedCollection,
+            image: updatedCollection.image || '',
+            isFeatured: updatedCollection.isFeatured ?? false,
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          Array.isArray(errorData.message)
+            ? errorData.message.join(', ')
+            : errorData.message || 'Failed to update collection.'
+        )
+      }
+
+      const updatedData = await response.json()
+
+      setCollections((previousCollections) =>
+        previousCollections.map((collection) =>
+          collection.id === id ? updatedData : collection
+        )
+      )
+
+      setToastTitle('COLLECTION UPDATED SUCCESSFULLY')
+      setToastMessage('Collection changes have been saved.')
+      setToastVisible(true)
+
+      return true
+    } catch (error) {
+      console.error('Error updating collection:', error)
       alert(error.message)
 
       return false
@@ -124,6 +188,8 @@ function App() {
       <Toast
         visible={toastVisible}
         onClose={closeToast}
+        title={toastTitle}
+        message={toastMessage}
       />
 
       <main id="home">
@@ -183,7 +249,10 @@ function App() {
             <Route
               path="/archive/:id"
               element={
-                <CollectionDetailRoute collections={collections} />
+                <CollectionDetailRoute
+                  collections={collections}
+                  onUpdateCollection={handleUpdateCollection}
+                />
               }
             />
           </Routes>
