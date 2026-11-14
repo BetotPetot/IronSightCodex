@@ -53,7 +53,7 @@ function AddCollection({ onAddCollection }) {
         if (imageInput) imageInput.value = ''
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault()
 
         const newErrors = {}
@@ -76,10 +76,14 @@ function AddCollection({ onAddCollection }) {
             ? URL.createObjectURL(imageFile)
             : ''
 
-        onAddCollection({
+        const success = await onAddCollection({
             ...formData,
             image: imageUrl,
         })
+
+        if (!success) {
+            return
+        }
 
         setFormData(initialFormData)
         setImageFile(null)

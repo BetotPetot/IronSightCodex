@@ -1,7 +1,11 @@
-
 import { useEffect } from 'react'
 
-function Toast({ visible, onClose }) {
+function Toast({
+    visible,
+    onClose,
+    title = 'COLLECTION ADDED SUCCESSFULLY',
+    message = 'Form validation completed.',
+}) {
     useEffect(() => {
         if (!visible) return
 
@@ -21,8 +25,8 @@ function Toast({ visible, onClose }) {
             <span className="toast-icon">✓</span>
 
             <div className="toast-content">
-                <strong>COLLECTION ADDED SUCCESSFULLY</strong>
-                <p>Form validation completed.</p>
+                <strong>{title}</strong>
+                <p>{message}</p>
             </div>
 
             <button
