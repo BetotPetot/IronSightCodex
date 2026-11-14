@@ -1,5 +1,5 @@
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   Routes,
   Route,
@@ -20,35 +20,6 @@ import AddCollectionPage from './pages/AddCollectionPage'
 
 import './App.css'
 
-const initialCollections = [
-  {
-    id: 1,
-    name: 'M1 Garand',
-    origin: 'USA',
-    category: 'Rifle',
-    image: '/images/m1garand.jpg',
-    description:
-      'A historical semi-automatic rifle widely used during World War II and the Korean War.',
-  },
-  {
-    id: 2,
-    name: 'Kar 98k',
-    origin: 'GERMANY',
-    category: 'Rifle',
-    image: '/images/kar98k.jpg',
-    description:
-      'A historical bolt-action rifle adopted by the German Wehrmacht in 1935.',
-  },
-  {
-    id: 3,
-    name: 'StG 44',
-    origin: 'GERMANY',
-    category: 'Rifle',
-    image: '/images/stg44.jpg',
-    description:
-      'A historically significant German firearm from the later period of World War II.',
-  },
-]
 
 function CollectionDetailRoute({ collections }) {
   const { id } = useParams()
@@ -61,9 +32,37 @@ function CollectionDetailRoute({ collections }) {
 }
 
 function App() {
-  const [collections, setCollections] = useState(initialCollections)
+  const [collections, setCollections] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+
+  useEffect(() => {
+    async function fetchCollections() {
+      try {
+        setLoading(true)
+        setError('')
+
+        const response = await fetch(
+          'http://localhost:3000/collections'
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch collections.')
+        }
+
+        const data = await response.json()
+        setCollections(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchCollections()
+  }, [])
 
   const navigate = useNavigate()
 
@@ -73,19 +72,49 @@ function App() {
     setToastVisible(false)
   }, [])
 
-  function handleAddCollection(newCollection) {
-    const collection = {
-      ...newCollection,
-      id: Date.now(),
+  async function handleAddCollection(newCollection) {
+    try {
+      const response = await fetch(
+        'http://localhost:3000/collections',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...newCollection,
+            image: newCollection.image || '',
+            isFeatured: false,
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          Array.isArray(errorData.message)
+            ? errorData.message.join(', ')
+            : errorData.message || 'Failed to add collection.'
+        )
+      }
+
+      const createdCollection = await response.json()
+
+      setCollections((previousCollections) => [
+        ...previousCollections,
+        createdCollection,
+      ])
+
+      setToastVisible(true)
+      navigate('/archive')
+
+      return true
+    } catch (error) {
+      console.error('Error adding collection:', error)
+      alert(error.message)
+
+      return false
     }
-
-    setCollections((previousCollections) => [
-      ...previousCollections,
-      collection,
-    ])
-
-    setToastVisible(true)
-    navigate('/archive')
   }
 
   return (
@@ -98,61 +127,67 @@ function App() {
       />
 
       <main id="home">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Home />
-                <CollectionStats
-                  collections={collections}
+        {loading && <p>Loading collections...</p>}
+
+        {error && <p role="alert">{error}</p>}
+
+        {!loading && !error && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Home />
+                  <CollectionStats
+                    collections={collections}
+                  />
+                </>
+              }
+            />
+
+            <Route
+              path="/archive"
+              element={
+                <>
+                  <Home />
+
+                  <CollectionStats
+                    collections={collections}
+                  />
+
+                  <Archive
+                    collections={collections}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                </>
+              }
+            />
+
+            <Route
+              path="/add-collection"
+              element={
+                <AddCollectionPage
+                  onAddCollection={handleAddCollection}
                 />
-              </>
-            }
-          />
+              }
+            />
 
-          <Route
-            path="/archive"
-            element={
-              <>
-                <Home />
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
+            />
 
-                <CollectionStats
-                  collections={collections}
-                />
-
-                <Archive
-                  collections={collections}
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                  selectedCategory={selectedCategory}
-                  setSelectedCategory={setSelectedCategory}
-                />
-              </>
-            }
-          />
-
-          <Route
-            path="/add-collection"
-            element={
-              <AddCollectionPage
-                onAddCollection={handleAddCollection}
-              />
-            }
-          />
-
-          <Route
-            path="*"
-            element={<Navigate to="/" replace />}
-          />
-
-          <Route
-            path="/archive/:id"
-            element={
-              <CollectionDetailRoute collections={collections} />
-            }
-          />
-        </Routes>
+            <Route
+              path="/archive/:id"
+              element={
+                <CollectionDetailRoute collections={collections} />
+              }
+            />
+          </Routes>
+        )}
       </main>
 
       <Footer />

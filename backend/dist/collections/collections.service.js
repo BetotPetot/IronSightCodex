@@ -6,8 +6,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 let CollectionsService = class CollectionsService {
-    collections = [];
-    nextId = 1;
+    collections = [
+        {
+            id: 1,
+            name: 'M1 Garand',
+            origin: 'USA',
+            category: 'Rifle',
+            description: 'A historical semi-automatic rifle widely used during World War II and the Korean War.',
+            image: '/images/m1garand.jpg',
+            isFeatured: true,
+        },
+        {
+            id: 2,
+            name: 'Kar 98k',
+            origin: 'GERMANY',
+            category: 'Rifle',
+            description: 'A historical bolt-action rifle adopted by the German Wehrmacht in 1935.',
+            image: '/images/kar98k.jpg',
+            isFeatured: true,
+        },
+        {
+            id: 3,
+            name: 'StG 44',
+            origin: 'GERMANY',
+            category: 'Rifle',
+            description: 'A historically significant German firearm from the later period of World War II.',
+            image: '/images/stg44.jpg',
+            isFeatured: true,
+        },
+    ];
+    nextId = 4;
     create(createCollectionDto) {
         const isDuplicate = this.collections.some((collection) => collection.name.toLowerCase() ===
             createCollectionDto.name.toLowerCase());
