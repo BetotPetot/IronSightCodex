@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function CollectionDetail({ collection, onUpdateCollection }) {
+function CollectionDetail({ collection, onUpdateCollection, onDeleteCollection }) {
     const [isEditing, setIsEditing] = useState(false)
     const [formData, setFormData] = useState(null)
 
@@ -48,6 +48,16 @@ function CollectionDetail({ collection, onUpdateCollection }) {
         if (success) {
             setIsEditing(false)
         }
+    }
+
+    async function handleDelete() {
+        const confirmed = window.confirm(
+            `Are you sure you want to delete "${collection.name}"?`
+        )
+
+        if (!confirmed) return
+
+        await onDeleteCollection(collection.id)
     }
 
     return (
@@ -150,13 +160,23 @@ function CollectionDetail({ collection, onUpdateCollection }) {
                         <span>// COLLECTION DETAILS</span>
                     </div>
 
-                    <button
-                        type="button"
-                        className="button button-primary"
-                        onClick={handleEdit}
-                    >
-                        EDIT COLLECTION
-                    </button>
+                    <div className="detail-actions">
+                        <button
+                            type="button"
+                            className="button button-primary"
+                            onClick={handleEdit}
+                        >
+                            EDIT COLLECTION
+                        </button>
+
+                        <button
+                            type="button"
+                            className="button button-secondary"
+                            onClick={handleDelete}
+                        >
+                            DELETE COLLECTION
+                        </button>
+                    </div>
 
                     {collection.image && (
                         <img

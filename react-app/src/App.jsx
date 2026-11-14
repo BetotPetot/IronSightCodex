@@ -25,6 +25,7 @@ import './App.css'
 function CollectionDetailRoute({
   collections,
   onUpdateCollection,
+  onDeleteCollection,
 }) {
   const { id } = useParams()
 
@@ -36,6 +37,7 @@ function CollectionDetailRoute({
     <CollectionDetail
       collection={collection}
       onUpdateCollection={onUpdateCollection}
+      onDeleteCollection={onDeleteCollection}
     />
   )
 }
@@ -181,6 +183,36 @@ function App() {
     }
   }
 
+  async function handleDeleteCollection(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/collections/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.message || 'Failed to delete collection.'
+        )
+      }
+
+      setCollections(prev =>
+        prev.filter(collection => collection.id !== id)
+      )
+
+      setToastTitle('COLLECTION DELETED SUCCESSFULLY')
+      setToastMessage('Collection has been removed from the archive.')
+      setToastVisible(true)
+
+      navigate('/archive')
+      return true
+    } catch (error) {
+      console.error('Error deleting collection:', error)
+      alert(error.message)
+      return false
+    }
+  }
+
   return (
     <>
       <Header />
@@ -252,6 +284,7 @@ function App() {
                 <CollectionDetailRoute
                   collections={collections}
                   onUpdateCollection={handleUpdateCollection}
+                  onDeleteCollection={handleDeleteCollection}
                 />
               }
             />
