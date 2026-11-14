@@ -1,0 +1,48 @@
+@baseUrl = http://localhost:3000
+
+### GET - Get All Collections
+GET {{baseUrl}}/collections
+
+### POST - Create Collection
+POST {{baseUrl}}/collections
+Content-Type: application/json
+
+{
+  "name": "M1 Garand",
+  "origin": "United States",
+  "category": "Semi-Automatic Rifle",
+  "description": "A historical military firearm developed in the United States.",
+  "image": "https://example.com/m1-garand.jpg",
+  "isFeatured": true
+}
+
+### GET - Get Collection by ID
+GET {{baseUrl}}/collections/1
+
+### PATCH - Update Collection
+PATCH {{baseUrl}}/collections/1
+Content-Type: application/json
+
+{
+  "description": "Updated historical description for testing the PATCH endpoint.",
+  "isFeatured": false
+}
+
+### DELETE - Delete Collection
+DELETE {{baseUrl}}/collections/1
+
+### GET - Test Not Found Exception
+GET {{baseUrl}}/collections/999
+
+### POST - Test Validation Error
+POST {{baseUrl}}/collections
+Content-Type: application/json
+
+{
+  "name": "AB",
+  "origin": "US",
+  "category": "R",
+  "description": "Short",
+  "image": "https://example.com/image.jpg",
+  "isFeatured": "yes"
+}
