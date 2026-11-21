@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
   "description": "Updated historical description for testing the PATCH endpoint.",
-  "isFeatured": false
+  "isFeatured": true
 }
 
 ### DELETE - Delete Collection
@@ -45,4 +45,17 @@ Content-Type: application/json
   "description": "Short",
   "image": "https://example.com/image.jpg",
   "isFeatured": "yes"
+}
+
+### Create Collection
+POST http://localhost:3000/collections
+Content-Type: application/json
+
+{
+  "name": "Springfield M1903",
+  "origin": "United States",
+  "category": "Rifle",
+  "description": "A historical bolt-action rifle used by the United States military.",
+  "image": "",
+  "isFeatured": false
 }
