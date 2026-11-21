@@ -1,0 +1,32 @@
+
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+**/build/
+
+# Generated Prisma Client
+backend/src/generated/
+
+# Environment variables
+**/.env
+**/.env.*
+!**/.env.example
+
+# TypeScript cache
+**/*.tsbuildinfo
+
+# AI/editor local configuration
+backend/.agents/
+backend/.claude/
+backend/.cursor/
+backend/.devin/
+backend/.codex/
+
+# Logs
+**/*.log
+
+# OS files
+.DS_Store
+Thumbs.db

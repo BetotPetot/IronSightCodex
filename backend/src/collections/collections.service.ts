@@ -1,115 +1,86 @@
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common'
 
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { Collection } from './entities/collection.entity.js';
-import { CreateCollectionDto } from './dto/create-collection.dto.js';
-import { UpdateCollectionDto } from './dto/update-collection.dto.js';
+import { PrismaService } from '../database/prisma.service.js'
+import { Prisma } from '../generated/prisma/client.js'
+
+import { CreateCollectionDto } from './dto/create-collection.dto.js'
+import { UpdateCollectionDto } from './dto/update-collection.dto.js'
 
 @Injectable()
 export class CollectionsService {
+  constructor(private readonly prisma: PrismaService) {}
 
-  private collections: Collection[] = [
-    {
-      id: 1,
-      name: 'M1 Garand',
-      origin: 'USA',
-      category: 'Rifle',
-      description:
-        'A historical semi-automatic rifle widely used during World War II and the Korean War.',
-      image: '/images/m1garand.jpg',
-      isFeatured: true,
-    },
-    {
-      id: 2,
-      name: 'Kar 98k',
-      origin: 'GERMANY',
-      category: 'Rifle',
-      description:
-        'A historical bolt-action rifle adopted by the German Wehrmacht in 1935.',
-      image: '/images/kar98k.jpg',
-      isFeatured: true,
-    },
-    {
-      id: 3,
-      name: 'StG 44',
-      origin: 'GERMANY',
-      category: 'Rifle',
-      description:
-        'A historically significant German firearm from the later period of World War II.',
-      image: '/images/stg44.jpg',
-      isFeatured: true,
-    },
-  ];
+  async create(createCollectionDto: CreateCollectionDto) {
+    try {
+      return await this.prisma.collection.create({
+        data: createCollectionDto,
+      })
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Collection name already exists')
+      }
 
-  private nextId = 4;
-
-
-  create(createCollectionDto: CreateCollectionDto): Collection {
-    const isDuplicate = this.collections.some(
-      (collection) =>
-        collection.name.toLowerCase() ===
-        createCollectionDto.name.toLowerCase(),
-    );
-
-    if (isDuplicate) {
-      throw new ConflictException('Collection name already exists');
+      throw error
     }
-
-    const newCollection: Collection = {
-      id: this.nextId++,
-      ...createCollectionDto,
-    };
-
-    this.collections.push(newCollection);
-    return newCollection;
   }
 
-  findAll(): Collection[] {
-    return this.collections;
+  async findAll() {
+    return this.prisma.collection.findMany()
   }
 
-  findOne(id: number): Collection {
-    const collection = this.collections.find(
-      (item) => item.id === id,
-    );
+  async findOne(id: number) {
+    const collection = await this.prisma.collection.findUnique({
+      where: { id },
+    })
 
     if (!collection) {
-      throw new NotFoundException(`Collection with ID ${id} not found`);
+      throw new NotFoundException(
+        `Collection with ID ${id} not found`,
+      )
     }
 
-    return collection;
+    return collection
   }
 
-  update(
+  async update(
     id: number,
     updateCollectionDto: UpdateCollectionDto,
-  ): Collection {
-    const collection = this.findOne(id);
+  ) {
+    await this.findOne(id)
 
-    if (updateCollectionDto.name) {
-      const updatedName = updateCollectionDto.name.toLowerCase();
-
-      const isDuplicate = this.collections.some(
-        (item) =>
-          item.id !== id &&
-          item.name.toLowerCase() === updatedName,
-      );
-
-      if (isDuplicate) {
-        throw new ConflictException('Collection name already exists');
+    try {
+      return await this.prisma.collection.update({
+        where: { id },
+        data: updateCollectionDto,
+      })
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Collection name already exists')
       }
-    }
 
-    Object.assign(collection, updateCollectionDto);
-    return collection;
+      throw error
+    }
   }
 
-  remove(id: number): { message: string } {
-    const collection = this.findOne(id);
+  async remove(id: number) {
+    const collection = await this.findOne(id)
 
-    this.collections = this.collections.filter(
-      (item) => item.id !== id,
-    );
+    await this.prisma.collection.delete({
+      where: { id },
+    })
 
-    return { message: `Collection "${collection.name}" deleted successfully` };
+    return {
+      message: `Collection "${collection.name}" deleted successfully`,
+    }
   }
 }
